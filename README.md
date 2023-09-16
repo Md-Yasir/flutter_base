@@ -1,4 +1,4 @@
-# flutter_base_ui
+# flutter_base
 
 A new Flutter project.
 
