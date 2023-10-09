@@ -1,10 +1,18 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_base/services/api_client.dart';
 
 class LoginSignUpPage extends StatelessWidget {
-  const LoginSignUpPage({super.key});
+  LoginSignUpPage({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void loginUser() async {
+    var email = emailController.text;
+    var password = passwordController.text;
+    await ApiClient().login(email, password);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +24,7 @@ class LoginSignUpPage extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Container(
-              color: const Color.fromRGBO(117, 121, 123, 100),
+              color: const Color.fromARGB(255, 255, 255, 255),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -55,11 +63,17 @@ class LoginSignUpPage extends StatelessWidget {
                 spreadRadius: 0.0)
           ]),
           child: TextField(
+            cursorHeight: 20.0,
+            controller: emailController,
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 contentPadding: const EdgeInsets.all(15),
-                hintText: 'Email',
+                labelText: 'Email',
+                labelStyle: const TextStyle(
+                  color: Colors.blueGrey,
+                ),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintStyle: const TextStyle(
                     color: Color.fromARGB(255, 113, 109, 109), fontSize: 14),
                 // prefixIcon: Padding(
@@ -104,11 +118,16 @@ class LoginSignUpPage extends StatelessWidget {
                 spreadRadius: 0.0)
           ]),
           child: TextField(
+            controller: passwordController,
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 contentPadding: const EdgeInsets.all(15),
-                hintText: 'Password',
+                labelText: 'Password',
+                labelStyle: const TextStyle(
+                  color: Colors.blueGrey,
+                ),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintStyle: const TextStyle(
                     color: Color.fromARGB(255, 113, 109, 109), fontSize: 14),
                 // prefixIcon: Padding(
@@ -140,6 +159,13 @@ class LoginSignUpPage extends StatelessWidget {
                     borderSide: BorderSide.none)),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: ElevatedButton(
+            onPressed: loginUser,
+            child: const Text('Sign Up'),
+          ),
+        )
       ],
     );
   }
