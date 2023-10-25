@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/pages/dashboard/dashboard.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_base/services/api_client.dart';
+import 'package:get/get.dart';
 
 class LoginSignUpPage extends StatelessWidget {
   LoginSignUpPage({super.key});
@@ -11,7 +12,7 @@ class LoginSignUpPage extends StatelessWidget {
   void loginUser() async {
     var email = emailController.text;
     var password = passwordController.text;
-    await ApiClient().login(email, password);
+    // await ApiClient().login(email, password);
   }
 
   @override
@@ -33,15 +34,15 @@ class LoginSignUpPage extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 8,
-            // child: Image.asset('images/school.png'),
-            child: Image.asset(
-              'images/school.png',
-              fit: BoxFit.fill,
-              height: 1000,
-            ),
-          )
+          // Expanded(
+          //   flex: 8,
+          //   // child: Image.asset('images/school.png'),
+          //   child: Image.asset(
+          //     'images/school.png',
+          //     fit: BoxFit.fill,
+          //     height: 1000,
+          //   ),
+          // )
         ],
       ),
     );
@@ -53,8 +54,8 @@ class LoginSignUpPage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(
             top: 40,
-            left: 70,
-            right: 70,
+            left: 40,
+            right: 40,
           ),
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
@@ -108,8 +109,8 @@ class LoginSignUpPage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(
             top: 40,
-            left: 70,
-            right: 70,
+            left: 40,
+            right: 40,
           ),
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
@@ -119,6 +120,7 @@ class LoginSignUpPage extends StatelessWidget {
           ]),
           child: TextField(
             controller: passwordController,
+            obscureText: true,
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -162,7 +164,9 @@ class LoginSignUpPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(30.0),
           child: ElevatedButton(
-            onPressed: loginUser,
+            onPressed: () {
+              Get.to(() => const DashBoardPage());
+            },
             child: const Text('Sign Up'),
           ),
         )
